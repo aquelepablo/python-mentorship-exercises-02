@@ -1,5 +1,11 @@
 """
-Exercício 1: Gerenciador de lista de tarefas
+Exercício 1: Gerenciador de Lista de Tarefas (List + IF)
+Objetivo: Praticar busca e existência em listas.
+1. Crie uma lista chamada tarefas com: "Estudar Python", "Limpar quarto", "Fazer exercícios".
+2. Peça para o usuário digitar uma nova tarefa.
+3. Lógica: Se a tarefa já estiver na lista (use o operador in), exiba "Essa tarefa já existe!". Caso contrário, adicione-a à 
+lista com .append() e exiba a lista atualizada.
+
 """
 
 try:
