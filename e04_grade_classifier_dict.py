@@ -27,9 +27,6 @@ try:
 
    subject = input(f"Informe o nome de uma matéria ({subjects_list}) : ").strip()
 
-   #normalized_subject_list = list(map(lambda t: t.strip().lower(), student_subject_grades))
-   #Pensei nessa solução, mas isso gera o problema de não conseguir buscar a chave depois. Resolvi deixar a pesquisa literal.
-
    if subject not in student_subject_grades.keys():
       print("Matéria não encontrada")
    else:
