@@ -25,9 +25,10 @@ def normalize_text_without_accent(text: str) -> str:
 
     return normalized_text
 
-def normalize_text_without_accent_and_special_chars(text: str) -> str:
+def normalize_text_without_accents_and_special_chars(text: str) -> str:
     """
-    Normalize a text by removing accents, special characters, and converting to lowercase.
+    Normalize text by removing accents, punctuation, and special characters,
+    keeping only letters, numbers, and spaces.
     """
 
     normalized_text = text.strip().lower()
@@ -35,8 +36,9 @@ def normalize_text_without_accent_and_special_chars(text: str) -> str:
     normalized_text = "".join(
         char
         for char in normalized_text
-        # Remove accents and special characters, keeping only letters and numbers
-        if not unicodedata.combining(char) and unicodedata.category(char)[0] in ("L", "N")
+        # Remove accents, punctuation, symbols and special characters, keeping only letters, numbers, and spaces
+        if not unicodedata.combining(char) 
+        and (unicodedata.category(char)[0] in ("L", "N") or char == " ")
     )
 
     return normalized_text
