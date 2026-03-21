@@ -11,11 +11,7 @@ Enunciado:
 4. Ordene a lista pela distancia, da mais proxima para a mais distante.
 5. Exiba o roteiro de entrega otimizado.
 """
-
-from dis import disco
-from typing import List
-
-from shared.text import normalize_number, normalize_text_without_accent, normalize_text_without_accents_and_special_chars
+from shared.text import normalize_number, normalize_text_without_accents_and_special_chars
 
 
 def convert_distance(value: str) -> float | None:
@@ -50,8 +46,6 @@ def convert_distance(value: str) -> float | None:
     
 
 try:
-
-    print(len("ROTEIRO DE ENTREGA OTIMIZADO"))
     print("---| Otimizador de Rotas de Entrega |---\n")
 
     # Constants / Configuration
@@ -60,47 +54,58 @@ try:
 
     # Variables
     destinies_list = []
-    attempts = 0
-    input_count = 1
     city = None
     distance = 0.0
     city_normalized = None
     distance_normalized = None
-    convert_to = ""
 
 
     # Inputs
     for count in range (0, MAX_DESTINIES):
+
+        city_attempts = 0
         while not city_normalized:
-            if attempts > MAX_ATTEMPTS:
+            if city_attempts > MAX_ATTEMPTS:
                 raise ValueError("Limite de tentativas alcançado.")
 
-            city = normalize_text_without_accents_and_special_chars(
-                input(
-                    f"{'Informe a cidade: ' if not city else 'Entrada inválida ' + str(attempts) + '/' + str(MAX_ATTEMPTS) + '. Informe um nome de cidade: '}"
-                        ).strip())
+            if city_attempts == 0:
+                prompt_message = "Informe a cidade: "
+            else:
+                prompt_message = (
+                    f"Entrada inválida {city_attempts}/{MAX_ATTEMPTS}. "
+                    "Informe um nome de cidade: "
+                )
+            
+            raw_city = input(prompt_message)
+            city = normalize_text_without_accents_and_special_chars(raw_city)
+            
             if city:
                 city_normalized = city
                 city = None
-                attempts = 0
             else:
-                attempts += 1
-                city = " "
+                city_attempts += 1
         
-        while not distance_normalized:
-            if attempts > MAX_ATTEMPTS:
+        destiny_attempts = 0
+        while distance_normalized is None:
+            if destiny_attempts > MAX_ATTEMPTS:
                 raise ValueError("Limite de tentativas alcançado.")
 
-            distance = convert_distance(
-                input(
-                    f"{'Informe a distância: ' if not city else 'Entrada inválida ' + str(attempts) + '/' + str(MAX_ATTEMPTS) + '. Informe uma distância válida: '}"
-                        ).strip())
-            if distance:
+            if destiny_attempts == 0:
+                prompt_message = "Informe a distância: "
+            else:
+                prompt_message = (
+                    f"Entrada inválida {destiny_attempts}/{MAX_ATTEMPTS}. "
+                    "Informe uma distância válida: "
+                )
+
+            raw_distance = input(prompt_message).strip()
+            distance = convert_distance(raw_distance)
+
+            if distance is not None:
                 distance_normalized = distance
                 distance = None
             else:
-                attempts += 1
-                distance = " "
+                destiny_attempts += 1
         
         destinies_list.append((city_normalized, distance_normalized))
         city_normalized = None
