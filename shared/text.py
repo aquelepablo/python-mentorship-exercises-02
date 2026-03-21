@@ -45,10 +45,18 @@ def normalize_text_without_accents_and_special_chars(text: str) -> str:
 
 def normalize_number(value: str, digits: int = None) -> float | None:
     """
-    Normalize a number string that may use '.' as thousands separator
-    and ',' as decimal separator, returning a float.
+    Normalize a string representing a number by removing accents, special characters, and converting it to a float.
     """
-    value = value.strip()
+    
+    value = value.strip().lower()
+    value = unicodedata.normalize("NFD", value)
+    value = "".join(
+        char
+        for char in value
+        # Remove accents and special characters, keeping only digits, dots, and commas
+        if not unicodedata.combining(char)
+        and (char.isdigit() or char in ".,")
+    )
 
     if not value:
         return None
