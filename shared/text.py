@@ -42,3 +42,31 @@ def normalize_text_without_accents_and_special_chars(text: str) -> str:
     )
 
     return normalized_text
+
+def normalize_number(value: str, digits: int = None) -> float | None:
+    """
+    Normalize a number string that may use '.' as thousands separator
+    and ',' as decimal separator, returning a float.
+    """
+    value = value.strip()
+
+    if not value:
+        return None
+
+    if "." in value and "," in value:
+        value = value.replace(".", "")
+
+    if "," in value:
+        value = value.replace(",", ".")
+
+    try:
+        return_value = float(value)
+    except Exception as e:
+        return None
+
+    if digits:
+        return_value = round(return_value, digits)
+    
+    return return_value
+
+    
