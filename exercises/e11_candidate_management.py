@@ -19,12 +19,16 @@ python_jobs = {"Ana", "Bruno", "Caio"}
 analyst_jobs = {"Caio", "Duda", "Elena"}
 
 # Output
+
+print(f"Candidatos da vaga de Python: {python_jobs}")
+print(f"Candidatos da vaga de Analista: {analyst_jobs}")
+
 # Candidatos inscritos para ambas as vagas (interseção)
-print(f"Candidatos inscritos em ambas as vagas: {python_jobs | analyst_jobs}")
+print(f"Candidatos inscritos em ambas as vagas: {python_jobs & analyst_jobs}")
 
 # Candidatos únicos inscritos no processo seletivo (união)
-print(f"Candidatos únicos inscritos no processo seletivo: {python_jobs & analyst_jobs}")
+print(f"Candidatos únicos inscritos no processo seletivo: {python_jobs | analyst_jobs}")
 
 # Candidatos apenas na vaga de Python e nao na de Analista
-print(f"Candidatos únicos inscritos no processo seletivo: {python_jobs - analyst_jobs}")
+print(f"Candidatos apenas na vaga de Python e não de Analista: {python_jobs - analyst_jobs}")
 

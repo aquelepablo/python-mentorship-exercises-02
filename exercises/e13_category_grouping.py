@@ -83,7 +83,7 @@ try:
          else:
                prompt_message = (
                   f"Entrada inválida {priority_attempts}/{MAX_ATTEMPTS}. "
-                  "Informe uma distância válida: "
+                  "Informe uma prioridade válida (1. Alta, 2. Media, 3. Baixa): "
                )
 
          raw_priority = input(prompt_message).strip()
@@ -98,11 +98,6 @@ try:
       priority_task_list[priority_normalized].append(task_normalized)
       task_normalized = None
       priority_normalized = None   
-
-
-   # Data Transformation
-   for priority in priority_task_list.keys():
-       priority_task_list[priority].sort(key=lambda x: x[1])
 
    # Output
    print("\nLista de Tarefas por Prioridade:")

@@ -15,7 +15,7 @@ Enunciado:
 
 import math
 
-from shared.text import normalize_number, normalize_text_without_accents_and_special_chars
+from shared.text import normalize_number
 
 def convert_coordinates(coord_pair: str) -> tuple | None:
 
@@ -26,7 +26,7 @@ def convert_coordinates(coord_pair: str) -> tuple | None:
         coord_x = normalize_number(coord_list[0])
         coord_y = normalize_number(coord_list[1])
 
-        if coord_x and coord_y:
+        if coord_x is not None and coord_y is not None:
             return (coord_x, coord_y)
 
     return None
@@ -73,6 +73,9 @@ try:
                 if coords not in unique_coordinates:
                     coordinates_list.append(coords)
                     unique_coordinates.add(coords)
+                else:
+                    print("Coordenada duplicada ignorada.")
+                
             else:
                 coord_attempts += 1
         
