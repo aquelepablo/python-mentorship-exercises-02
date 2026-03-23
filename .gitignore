@@ -8,3 +8,8 @@ wheels/
 
 # Virtual environments
 .venv
+
+#others
+docs/
+.vscode/
+know_errors.json
